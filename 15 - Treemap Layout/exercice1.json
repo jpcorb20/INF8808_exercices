@@ -1,0 +1,40 @@
+{"name":"cours",
+"children":
+
+[
+
+{
+	"name": "Génie Informatique",
+	"value": 100,
+	"children": [
+		{"name": "INF8808","value": 50},
+		{"name": "INF6606","value":50},
+		{"name": "INF4420A", "value":50}
+		]
+		
+	},
+	
+{
+	"name": "Génie Mathématique",
+	"value": 100,
+	"children": [
+		{"name": "MTH3400","value": 50},
+		{"name": "MTH2312","value":50},
+		{"name": "MTH6210", "value":50}
+		]
+		
+	},
+	
+	{
+	"name": "Génie Aérospatial",
+	"value": 100,
+	"children": [
+		{"name": "AER3205","value": 50},
+		{"name": "AER4121","value":50},
+		{"name": "AER4715", "value":50}
+		]
+		
+	}
+]
+
+}
