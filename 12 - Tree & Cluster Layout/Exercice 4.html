@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 4 </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -27,11 +27,11 @@
             				.attr("height",500)
 							.append("g")
 							.attr("transform", "translate(50,50)");
-							
-			var tree = d3.layout.tree().size([400,400]);
+
+			var tree = d3.tree().size([400,400]);
 
 			// TODO : Faire les manipulations de l'énoncé
-			
+
         </script>
     </body>
 </html>

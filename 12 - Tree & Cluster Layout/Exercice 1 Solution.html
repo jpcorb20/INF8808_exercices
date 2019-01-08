@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 1 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -24,33 +24,52 @@
             				.append("svg")
             				.attr("width",400)
             				.attr("height",400);
-			
+
 			// Point à relier
 			canvas.append("circle").attr("cx",200).attr("cy",100).attr("r",5);
 			canvas.append("circle").attr("cx",100).attr("cy",300).attr("r",5);
 			canvas.append("circle").attr("cx",200).attr("cy",300).attr("r",5);
 			canvas.append("circle").attr("cx",300).attr("cy",300).attr("r",5);
-			
-			// Question 1
-			var diagonal1 = d3.svg.diagonal().source({x:200,y:100}).target({x:100,y:300});
-			var diagonal2 = d3.svg.diagonal().source({x:200,y:100}).target({x:200,y:300});
-			var diagonal3 = d3.svg.diagonal().source({x:200,y:100}).target({x:300,y:300});
-			
-			
+
+      // Question 1
+
+      var data1 = {
+        source: {x:200,y:100},
+        target: {x:100,y:300}
+      };
+
+      var data2 = {
+        source: {x:200,y:100},
+        target: {x:200,y:300}
+      };
+
+      var data3 = {
+        source: {x:200,y:100},
+        target: {x:300,y:300}
+      };
+
+      var link = d3.linkVertical()
+                .x(function(d) {
+                  return d.x;
+                })
+                .y(function(d) {
+                  return d.y;
+                });
+
 			// Question 2
 			canvas.append("path")
 					.attr("fill","none")
 					.attr("stroke","black")
-					.attr("d", diagonal1);
+					.attr("d", link(data1));
 			canvas.append("path")
 					.attr("fill","none")
 					.attr("stroke","black")
-					.attr("d", diagonal2);
+					.attr("d", link(data2));
 			canvas.append("path")
 					.attr("fill","none")
 					.attr("stroke","black")
-					.attr("d", diagonal3);
-			
+					.attr("d", link(data3));
+
         </script>
     </body>
 </html>

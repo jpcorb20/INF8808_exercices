@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 1 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -24,28 +24,28 @@
             				.append("svg")
             				.attr("width",1000)
             				.attr("height",500);
-							
+
             var group = canvas.append("g").attr("transform", "translate(500,250)"); // Nouvelle origine pour dessiner les figures géométriques
-			
+
             var triangleGauche = [
 				{x:-400,y:0},
 				{x:0,y:-200},
 				{x:0,y:200},
 				{x:-400,y:0}
 			];
-			
+
 			var triangleDroit = [ // Question 2
 				{x:400,y:0},
 				{x:0,y:-200},
 				{x:0,y:200},
 				{x:400,y:0}
 			];
-			
+
 			// Question 1
-			var line = d3.svg.line()
+			var line = d3.line()
 						.x(function(d) {return d.x;})
 						.y(function(d) {return d.y;});
-						
+
 			group.selectAll("path")
 				.data([triangleGauche,triangleDroit])
 				.enter()

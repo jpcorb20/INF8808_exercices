@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 2 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -25,11 +25,11 @@
             				.append("svg")
             				.attr("width",500)
             				.attr("height",500);
-							
+
             var group = canvas.append("g").attr("transform", "translate(75,175)"); // Nouvelle origine pour dessiner les figures géométriques
-			
+
 			var dist = 100;
-			
+
 			// On va nommer les points du  cube pour plus de facilité
 			var A = {x:0,y:0},
 				B = {x:250,y:0},
@@ -39,9 +39,9 @@
 				F = {x:250 + dist,y:0 - dist},
 				G = {x:250 + dist,y:250 - dist},
 				H = {x:0 + dist,y:250 - dist};
-			
+
             var cube3D = [ A,B,C,D,E,F,G, H];
-														
+
 			group.selectAll("circle")
 				.data(cube3D)
 				.enter()
@@ -49,33 +49,33 @@
 				.attr("cx", function(d){return d.x})
 				.attr("cy", function(d){return d.y})
 				.attr("r", 5);
-			
+
 			group.selectAll("text")
 				.data(cube3D)
 				.enter()
 				.append("text")
 				.attr("x", function(d){return d.x - 20})
 				.attr("y", function(d){return d.y - 10})
-				.text(function(d,i) {return String.fromCharCode(65 + i)});		
-				
-			d3.select(group.selectAll("circle")[0][7]).attr("fill", "grey");
-			
+				.text(function(d,i) {return String.fromCharCode(65 + i)});
+
+			d3.select(group.selectAll("circle").nodes()[0][7]).attr("fill", "grey");
+
 			// Question 1 : Création des paths
 			var pathFront = [A,B,C,D,A];
-				
+
 			var pathHaut = [A,E,F,B,A];
-				
+
 			var pathDroit = [B,F,G,C,B];
-			
+
 			var pathBehind1 = [E,H,G];
-			
+
 			var pathBehind2 = [D,H];
-			
+
 			// Question 1 : création de la fonction line()
-			var line = d3.svg.line()
+			var line = d3.line()
 						.x(function(d) {return d.x;})
 						.y(function(d) {return d.y;});
-			
+
 			// Question 1 : création du cube
 			group.selectAll("path")
 				.data([pathFront, pathHaut, pathDroit, pathBehind1, pathBehind2])

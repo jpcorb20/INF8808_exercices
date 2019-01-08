@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 1 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -14,8 +14,8 @@
             <p> Le but de cet exercice est de charger puis de manipuler un fichier de données externes CSV.</p>
             <p> Le format CSV est expliqué à <a href="https://fr.wikipedia.org/wiki/Comma-separated_values"> cette page</a>,
                 mais il suffit de retenir qu'il s'agit d'une représentation de données.
-            <p> Le fichier CSV utilisé dans cet exercice est disponible à <a href="./Exercice 1 Datas.csv"> cette adresse</a>. 
-                Il contient la position, la taille et la couleur des cercles à dessiner 
+            <p> Le fichier CSV utilisé dans cet exercice est disponible à <a href="./Exercice 1 Datas.csv"> cette adresse</a>.
+                Il contient la position, la taille et la couleur des cercles à dessiner
             </p>
             <p> Il vous est demandé de faire le travail suivant : </p>
             <ol>
@@ -28,8 +28,8 @@
             				.append("svg")
             				.attr("width",500)
             				.attr("height",500);
-            
-            d3.csv("./Exercice 1 Datas.csv", function(data){ // Question 1
+
+            d3.csv("./Exercice 1 Datas.csv").then(function(data){ // Question 1
             canvas.selectAll("circle").data(data).enter().append("circle") // Question 2
                      	   .attr("cx", function(d){return d.cx})
                      	   .attr("cy", function(d){return d.cy})

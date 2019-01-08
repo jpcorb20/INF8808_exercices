@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 4 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -26,34 +26,42 @@
             				.attr("height",500)
 							.append("g")
 							.attr("transform", "translate(50,50)");
-							
+
 			// Question 2
-			var tree = d3.layout.cluster().size([400,400]);
+			var tree = d3.cluster().size([400,400]);
 
 			// Question 1
-			d3.json("./famille.json", function (data) {
-				
-				var nodes = tree.nodes(data);
-				var links = tree.links(nodes);
-				
+			d3.json("./famille.json").then(function (data) {
+        var root = d3.hierarchy(data);
+        tree(root);
+
+				var nodes = root.descendants();
+				var links = root.descendants().slice(1);
+
 
 				var node = canvas.selectAll(".node")
 									.data(nodes)
 									.enter()
 									.append("g")
 										.attr("class","node")
-										.attr("transform", function(d) {return "translate(" + d.y + "," + d.x + ")"});									
+										.attr("transform", function(d) {return "translate(" + d.y + "," + d.x + ")"});
+
 				node.append("circle")
 						.attr("r",5)
 						.attr("fill","red");
-				
 
-				node.append("text").text(function(d) {return d.name;}).attr("y",-5);
-				
 
-				var diagonal = d3.svg.diagonal()
-										.projection(function(d) {return [d.y, d.x]});
-				
+				node.append("text").text(function(d) {return d.data.name;}).attr("y",-5);
+
+
+        var link = d3.linkHorizontal()
+                        .x(function(d) {
+                          return d.y;
+                        })
+                        .y(function(d) {
+                          return d.x;
+                        });
+
 				canvas.selectAll(".link")
 						.data(links)
 						.enter()
@@ -61,8 +69,8 @@
 						.attr("class","link")
 						.attr("fill","none")
 						.attr("stroke","#ADADAD")
-						.attr("d", diagonal);
-				
+						.attr("d", d=>link({source: d.parent, target: d}));
+
 			});
         </script>
     </body>

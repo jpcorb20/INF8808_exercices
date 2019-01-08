@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 1 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -24,29 +24,29 @@
             				.append("svg")
             				.attr("width",500)
             				.attr("height",500);
-			// Question 1				
+			// Question 1
             var q1 = canvas.append("g").attr("transform", "translate(100,250)");
 			var r = 70;
 			var p = Math.PI*2/3
-			
-			var arcTiers = d3.svg.arc()
+
+			var arcTiers = d3.arc()
 						.innerRadius(0)
 						.outerRadius(r)
 						.startAngle(0)
-						.endAngle(p);			
+						.endAngle(p);
 			q1.append("path").attr("d", arcTiers);
-			
+
 			// Question 2
 			var q2 = canvas.append("g").attr("transform", "translate(300,250)");
 			var r = 70;
 			var p = Math.PI*2
-			
-			var arcTiers = d3.svg.arc()
+
+			var arcTiers = d3.arc()
 						.innerRadius(r-10)
 						.outerRadius(r)
 						.startAngle(0)
 						.endAngle(p);
-						
+
 			q2.append("path").attr("d", arcTiers);
         </script>
     </body>

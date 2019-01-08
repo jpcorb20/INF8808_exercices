@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 2 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -27,37 +27,37 @@
             var margin = {top: 20, right: 30, bottom: 40, left: 40},
             width = 400 - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
-            
+
                      var canvas = d3.select("body")
                      				.append("svg")
                      				.attr("width",width + margin.left + margin.right)
                      				.attr("height",height + margin.top + margin.bottom)
             				.attr("transform", "translate(" + margin.left + "," + margin.top+")");
-            
-                     d3.json("./Exercice 2 Datas.json", function(data){
+
+                     d3.json("./Exercice 2 Datas.json").then(function(data){
                      var max = Math.max.apply(Math,data.map(function(o){return o.age;}));
                      var min = Math.min.apply(Math,data.map(function(o){return o.age;}));
-                     
-                     var heightScale = d3.scale.linear()
+
+                     var heightScale = d3.scaleLinear()
                      .domain([min, max])
                      .range([100,300]);
-                                 
+
                      canvas.selectAll("rect").data(data).enter().append("rect")
                      	   .attr("height", function(d){return heightScale(d.age)})
                      	   .attr("width", 50)
                      	   .attr("x", function(d,i){return 25 + i*100})
                      	   .attr("y", function(d){return 300 - heightScale(d.age)});
-                     
+
             var personnes = [];
-            
+
             for(i=0; i<3;i++){
             	personnes[i] = data[i].prenom + " " + data[i].nom ;
             }
-            
-            var x = d3.scale.ordinal().domain(personnes).rangeRoundBands([0, 300], .1);;
-            
-            var xAxis = d3.svg.axis().scale(x).orient("bottom");
-            
+
+            var x = d3.scaleBand().domain(personnes).range([0, 300]).round(.1);;
+
+            var xAxis = d3.axisBottom(x);
+
             canvas.append("g").call(xAxis).attr("transform", "translate(0," + (height - margin.bottom) + ")");
                      canvas.selectAll("text").attr("y", 15)
             						.attr("x", 5)
@@ -65,7 +65,7 @@
             						.attr("transform", "rotate(30)")
             						.style("text-anchor", "start")
             						.attr("font-size", 11);
-            });          
+            });
         </script>
     </body>
 </html>
