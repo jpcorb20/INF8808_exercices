@@ -40,7 +40,7 @@
         tree(root);
 
         var nodes = root.descendants();
-        var links = root.descendants().slice(1);
+        var links = root.links();
 
 				// Question 3
 				var node = canvas.selectAll(".node")
@@ -72,7 +72,7 @@
 						.attr("class","link")
 						.attr("fill","none")
 						.attr("stroke","#ADADAD")
-						.attr("d", d=>link({source: d.parent, target: d}));
+						.attr("d", d=>link(d));
 
 			});
         </script>

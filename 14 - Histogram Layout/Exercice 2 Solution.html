@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 2 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
-            border-color: blue;}		
+            border-color: blue;}
             .axis path,
             .axis line {
             fill: none;
@@ -18,20 +18,20 @@
     <body>
         <div class="énoncé">
             <p> Le but de ce chapitre est de présenter et manipuler les histogrammes (bar chart) dans D3.js. <br> Dans le cas où les données n'ont pas à êtres traitées et peuvent être affichées directement,
-                il n'est pas nécessaire de passer par le layout. Ce sera le cas dans cet exercice où l'on souhaite afficher les ventes mensuelles d'une société pour l'année 2015. 
+                il n'est pas nécessaire de passer par le layout. Ce sera le cas dans cet exercice où l'on souhaite afficher les ventes mensuelles d'une société pour l'année 2015.
 				<br> Les données se trouvent à <a href = "./exercice1.csv"> cette adresse</a>.
             </p>
             <p> Il vous est demandé de faire le travail suivant : </p>
             <ol>
-                <li> Créer les fonctions scales nécessaires (utiliser une fonction scale <b>ordinal</b> pour l'axe horizontal. Utiliser <b>.rangeBands</b> pour obtenir simplement l'emplacement des mois sur l'axe. 
-                    <br> Attention le domaine de la fonction verticale doit être obtenu à partir des données et non être inscrit en dur ! 
+                <li> Créer les fonctions scales nécessaires (utiliser une fonction scale <b>ordinal</b> pour l'axe horizontal. Utiliser <b>.rangeBands</b> pour obtenir simplement l'emplacement des mois sur l'axe.
+                    <br> Attention le domaine de la fonction verticale doit être obtenu à partir des données et non être inscrit en dur !
                 </li>
                 <li> Créer les axes horizontaux et verticaux de l'histogramme. </li>
                 <li> Ajouter les colonnes de l'histogramme.</li>
                 <li> Ajouter un titre de taille 20 pixels, centré en haut de l'histogramme et en caractère gras. </li>
             </ol>
         </div>
-        <script>				
+        <script>
             var margin = {
                 top: 50,
                 right: 30,
@@ -48,7 +48,7 @@
                 .append("g")
 					.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            d3.csv("exercice2.csv", function(data) {
+            d3.csv("exercice2.csv").then(function(data) {
 
 				// Permet de convertir en nombre JavaScript les strings représentant les ventes dans data
                 function conversion(vente) {
@@ -58,7 +58,7 @@
                 // Question 1
 
                 // Axe vertical
-                var y = d3.scale.linear()
+                var y = d3.scaleLinear()
                     .range([height, 0])
                     .domain([0,
                         d3.max(data, function(m) {
@@ -66,8 +66,7 @@
                         })
                     ]);
 
-                var yAxis = d3.svg.axis()
-                    .scale(y)
+                var yAxis = d3.axisLeft(y)
                     .orient("left")
                     .tickFormat(d3.format("$1,.0f")); // Permet de formatter l'affichage de l'axe vertical
 
@@ -81,7 +80,7 @@
                 var barWidth = width / data.length;
 
                 // Axe horizontal
-                var x = d3.scale.ordinal()
+                var x = d3.scalOrdinal()
                     /* Normalement la fonction ordinal associe un élément de domain à un élément de range.
                     Pour éviter de devoir écrire en dur la position des mois dans range, on utilise rangeBands qui va le faire automatiquement */
                     .rangeBands([0, width])
