@@ -23,7 +23,7 @@
             </p>
             <p> Il vous est demandé de faire le travail suivant : </p>
             <ol>
-                <li> Créer les fonctions scales nécessaires (utiliser une fonction scale <b>ordinal</b> pour l'axe horizontal. Utiliser <b>.rangeBands</b> pour obtenir simplement l'emplacement des mois sur l'axe.
+                <li> Créer les fonctions scales nécessaires (utiliser une fonction scale <b>band</b> pour l'axe horizontal. Utiliser <b>.range</b> pour obtenir simplement l'emplacement des mois sur l'axe.
                     <br> Attention le domaine de la fonction verticale doit être obtenu à partir des données et non être inscrit en dur !
                 </li>
                 <li> Créer les axes horizontaux et verticaux de l'histogramme. </li>
@@ -67,7 +67,6 @@
                     ]);
 
                 var yAxis = d3.axisLeft(y)
-                    .orient("left")
                     .tickFormat(d3.format("$1,.0f")); // Permet de formatter l'affichage de l'axe vertical
 
                 // On va récupérer le nom de tous les mois dans le tableau mois
@@ -80,15 +79,13 @@
                 var barWidth = width / data.length;
 
                 // Axe horizontal
-                var x = d3.scalOrdinal()
+                var x = d3.scaleBand()
                     /* Normalement la fonction ordinal associe un élément de domain à un élément de range.
                     Pour éviter de devoir écrire en dur la position des mois dans range, on utilise rangeBands qui va le faire automatiquement */
-                    .rangeBands([0, width])
+                    .range([0, width])
                     .domain(mois);
 
-                var xAxis = d3.svg.axis()
-                    .scale(x)
-                    .orient("bottom")
+                var xAxis = d3.axisBottom(x)
                     .tickSize(10, 0);
 
                 // Question 2
