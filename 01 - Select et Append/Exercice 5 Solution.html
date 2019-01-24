@@ -31,7 +31,7 @@
         </div>
         <script>
             // Selectionner la balise p de la deuxième balise div et modifier son texte
-            d3.select(d3.selectAll(".exercice div")[0][1]) // Choix de la deuxième balise <div>
+            d3.select(d3.selectAll(".exercice div").nodes()[1]) // Choix de la deuxième balise <div>
                 .select("p").text("Balise modifiée") // Modification de la balise <p>
         </script>
     </body>

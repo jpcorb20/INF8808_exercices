@@ -32,9 +32,9 @@
 
             // Supprimer la première et la troisième balise <p>
             // ATTENTION : on veut supprimer la BALISE (et pas seulement le texte de la balise)
-            var p = d3.selectAll(".exercice p");
-            p[0][0].remove();
-            p[0][2].remove();
+            var p = d3.selectAll(".exercice p").nodes();
+            p[0].remove();
+            p[2].remove();
         </script>
     </body>
 </html>
