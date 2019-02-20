@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 2 </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -30,49 +30,49 @@
             var canvas = d3.select("body")
                       				.append("svg")
                       				.attr("width",1000)
-                      				.attr("height",900);  
+                      				.attr("height",900);
 
 			// -------------------------------------------------------- Code pour afficher la légende ----------------------------------------------------
 			var legend = canvas.append("g")
 								.attr("class","legend")
 								.attr("transform","translate(10,50)");
-				
+
 			var gradient = canvas.append("defs")
 								.append("linearGradient")
 								.attr("id", "gradient")
 								.attr("x1", "0%")
 								.attr("x2", "100%")
 								.attr("spreadMethod", "pad");
-								
+
 			gradient.append("stop")
 					.attr("offset", "0%")
 					.attr("stop-color", "white")
 					.attr("stop-opacity", 1);
-					
+
 			gradient.append("stop")
 					.attr("offset", "100%")
 					.attr("stop-color", "red")
 					.attr("stop-opacity", 1);
-					
-			legend.append("text").text("0%").attr("transform","translate(0,20)");	
-				
+
+			legend.append("text").text("0%").attr("transform","translate(0,20)");
+
 			legend.append("rect")
 					.attr("width", 100)
 					.attr("height", 20)
 					.attr("transform","translate(25,5)")
 					.style("fill", "url(#gradient)");
-				
+
 			legend.append("text")
 					.text("100%")
 					.attr("transform","translate(130,20)");
-					
+
 			legend.append("text")
 					.text("Pourcentage de la population de chaque province pouvant soutenir une conversation en français");
-					
-			// -------------------------------------------------------- Fin du code pour afficher la légende ----------------------------------------------------	
+
+			// -------------------------------------------------------- Fin du code pour afficher la légende ----------------------------------------------------
 
 			// TODO : Faire les manipulations de l'énoncé
-			
+
          </script>
     </body>
 </html>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title> Exercice 2 Solution </title>
-        <script type="text/javascript" src="https://d3js.org/d3.v3.js"></script>
+        <script type="text/javascript" src="https://d3js.org/d3.v5.js"></script>
         <style>
             svg  {border-style: solid;
             border-color: blue;}
@@ -29,32 +29,32 @@
         <script>
 
 			// Echelle pour la Question 2
-			var scale = d3.scale.linear().domain([0,100]).range(["white","red"]);
-		
+			var scale = d3.scaleLinear().domain([0,100]).range(["white","red"]);
+
 			// Question 1
             var canvas = d3.select("body")
                       				.append("svg")
                       				.attr("width",1000)
-                      				.attr("height",900);  
+                      				.attr("height",900);
 
-            d3.json("./canada.geojson", function(data){
-            	
+            d3.json("./canada.geojson").then(function(data){
+
 				var data = data;
 				var group = canvas.append("g").selectAll("g")
             						.data(data.features)
             						.enter()
             						.append("g");
-            										
-            	var projection = d3.geo.mercator()
+
+            	var projection = d3.geoMercator()
 									.rotate([100, -45])
 									.center([5, 20])
 									.scale(1000)
 									.translate([500,500]);
-									
-            	var path = d3.geo.path().projection(projection);
-				
 
-				
+            	var path = d3.geoPath().projection(projection);
+
+
+
            		var areas = group.append("path")
            							.attr("d",path)
            							.attr("class","area")
@@ -62,7 +62,7 @@
 									.attr("stroke", "black")
            							.attr("fill", function(d){
 										return scale(d.frenchAble);
-									}); 
+									});
 				// Question 3
 				group.append("text")
 						.attr("x",function(d) {return path.centroid(d)[0]})
@@ -71,10 +71,10 @@
 						.attr("font-size", 12)
 						.attr("font-weight", "bold")
 						.text(function(d) {return (d.properties.shortname)});
-									
+
             	});
-				
-				
+
+
 				// Légende
 				var legend = canvas.append("g")
 						.attr("class","legend")
@@ -97,21 +97,21 @@
 						.attr("stop-color", "red")
 						.attr("stop-opacity", 1);
 
-				legend.append("text").text("0%").attr("transform","translate(0,20)");	
-					
+				legend.append("text").text("0%").attr("transform","translate(0,20)");
+
 				legend.append("rect")
 						.attr("width", 100)
 						.attr("height", 20)
 						.attr("transform","translate(25,5)")
 						.style("fill", "url(#gradient)");
-					
+
 				legend.append("text")
 						.text("100%")
 						.attr("transform","translate(130,20)");
 
 				legend.append("text")
 						.text("Pourcentage de la population de chaque province pouvant soutenir une conversation en français");
-				
+
         </script>
     </body>
 </html>
